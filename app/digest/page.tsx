@@ -1,12 +1,16 @@
-import { UserButton } from "@clerk/nextjs";
+import { UserButton , useUser  } from "@clerk/nextjs";
+
 import Link from 'next/link';
 import { DigestItem } from './components/DigestItem';
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { AddContentSidebar } from './components/AddContentSidebar';
 
 interface Feed {
   id: string;
   title: string;
-  type: 'calendar' | 'weather' | 'reddit' | 'techcrunch' | 'youtube' | 'instagram' | 'twitter';
-  content: any; // This should be more specific based on the feed type
+  type: 'calendar' | 'weather' | 'news';
+  content: any;
 }
 
 async function getFeeds(): Promise<Feed[]> {
@@ -16,16 +20,23 @@ async function getFeeds(): Promise<Feed[]> {
 
 export default async function DigestPage() {
   const feeds = await getFeeds();
+  const { isLoaded, isSignedIn, user } = useUser()
+  const userName = user?.firstName || '';
 
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Your Digest</h1>
+          <h1 className="text-2xl font-bold text-gray-900">{userName}'s Digest</h1>
           <div className="flex items-center">
-            <Link href="/add-content" className="mr-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-              Add Content
-            </Link>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" className="mr-4">Add Content</Button>
+              </SheetTrigger>
+              <SheetContent side="left">
+                <AddContentSidebar />
+              </SheetContent>
+            </Sheet>
             <UserButton afterSignOutUrl="/" />
           </div>
         </div>
@@ -35,15 +46,19 @@ export default async function DigestPage() {
         {feeds.length === 0 ? (
           <div className="text-center">
             <h2 className="text-xl font-semibold mb-4">Your digest is empty</h2>
-            <Link href="/add-content" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-              Add Your First Content
-            </Link>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="default">Add Your First Digest</Button>
+              </SheetTrigger>
+              <SheetContent side="left">
+                <AddContentSidebar />
+              </SheetContent>
+            </Sheet>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {feeds.map((feed) => (
               <DigestItem key={feed.id} title={feed.title}>
-                {/* Content will be added here based on feed type */}
                 <p>Feed content placeholder</p>
               </DigestItem>
             ))}

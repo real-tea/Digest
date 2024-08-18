@@ -1,7 +1,5 @@
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
-import { Footer } from "./components/footer";
-import { ClerkLogo } from "./components/clerk-logo";
 
 export default function Home() {
   return (
@@ -54,7 +52,6 @@ export default function Home() {
           </SignedOut>
         </div>
       </main>
-      <Footer />
     </>
   );
 }
