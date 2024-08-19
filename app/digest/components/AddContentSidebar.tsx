@@ -19,7 +19,7 @@ export function AddContentSidebar() {
                 <span className="text-2xl mr-3">{option.icon}</span>
                 <span className="text-lg font-medium">{option.title}</span>
               </div>
-              <Button variant="outline" onClick={() => handleAddContent(option.title)}>
+              <Button variant="outline">
                 Add
               </Button>
             </CardContent>
