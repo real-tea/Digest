@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -8,6 +10,10 @@ const contentOptions = [
 ];
 
 export function AddContentSidebar() {
+  function handleAddContent(menu: string) {
+    console.log(menu);
+  }
+
   return (
     <div className="h-full flex flex-col">
       <h2 className="text-2xl font-semibold mb-6">Add Content</h2>
@@ -19,7 +25,7 @@ export function AddContentSidebar() {
                 <span className="text-2xl mr-3">{option.icon}</span>
                 <span className="text-lg font-medium">{option.title}</span>
               </div>
-              <Button variant="outline">
+              <Button variant="outline" onClick={() => handleAddContent(option.title)}>
                 Add
               </Button>
             </CardContent>
@@ -28,9 +34,4 @@ export function AddContentSidebar() {
       </div>
     </div>
   );
-}
-
-function handleAddContent(contentType: string) {
-  // This function will be implemented later to handle adding content
-  console.log(`Adding ${contentType} content`);
 }

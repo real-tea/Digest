@@ -1,15 +1,15 @@
-import { UserButton , useUser  } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 
-import Link from 'next/link';
-import { DigestItem } from './components/DigestItem';
+import Link from "next/link";
+import { DigestItem } from "./components/DigestItem";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { AddContentSidebar } from './components/AddContentSidebar';
+import { AddContentSidebar } from "./components/AddContentSidebar.client";
 
 interface Feed {
   id: string;
   title: string;
-  type: 'calendar' | 'weather' | 'news';
+  type: "calendar" | "weather" | "news";
   content: any;
 }
 
@@ -28,10 +28,15 @@ export default async function DigestPage() {
       <header className="bg-accent-secondary shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-900">your digest</h1>
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" className="mr-4">Add Content</Button>
+                <Button
+                  variant="outline"
+                  className="px-4 ml-2 py-2 rounded-full bg-dark-bg text-white text-sm font-semibold"
+                >
+                  Add Content
+                </Button>
               </SheetTrigger>
               <SheetContent side="left">
                 <AddContentSidebar />

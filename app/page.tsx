@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <main className="bg-[#FAFAFA] min-h-screen">
+      <main className="bg-primary-bg min-h-screen">
         <div className="max-w-4xl mx-auto px-4 py-16">
           <header className="flex justify-between items-center mb-16">
            
@@ -18,7 +18,7 @@ export default function Home() {
             <SignedIn>
               <Link
                 href="/digest"
-                className="px-4 py-2 rounded-full bg-[#131316] text-white text-sm font-semibold"
+                className="px-4 py-2 rounded-full bg-dark-bg text-white text-sm font-semibold"
               >
                 My Digest
               </Link>
